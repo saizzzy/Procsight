@@ -46,7 +46,7 @@ Installation & Build
 
 # Clone the repository
 
-git clone [подозрительная ссылка удалена]
+git clone https://github.com/saizzzy/Procsight.git
 
 cd Procsight
 
