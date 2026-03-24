@@ -1,5 +1,3 @@
-<img width="1864" height="980" alt="изображение" src="https://github.com/user-attachments/assets/84f7711d-e4b6-407a-9670-700db9a71f6e" /># Procsight
-
 TUI-монитор процессов и системных ресурсов на C++.
 
 ### Сборка
@@ -12,5 +10,4 @@ cmake -S . -B build
 cmake --build build
 ./build/bin/procsight
 ```
-
-![Uploading Screenshot_20260324_194330.png…]()
+<img width="1864" height="980" alt="изображение" src="https://github.com/user-attachments/assets/84f7711d-e4b6-407a-9670-700db9a71f6e" /># Procsight
