@@ -55,7 +55,7 @@ void Renderer::draw(const UiFrame& f) {
 
     attron(COLOR_PAIR(theme_.pairFrame()));
     box(stdscr, 0, 0);
-    mvprintw(0, 2, "[ PROCSIGHT v1.4 | UI:%ldms PROC:%ldms ]",
+    mvprintw(0, 2, "[ PROCSIGHT v1.1 | UI:%ldms PROC:%ldms ]",
              f.refreshRate.count(),
              f.processRefreshRate.count());
     attroff(COLOR_PAIR(theme_.pairFrame()));
