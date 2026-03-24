@@ -1,29 +1,38 @@
 cmake_minimum_required(VERSION 3.20)
-project(ProcSight)
 
-# Стандарт C++17 необходим для работы с <filesystem>
+project(ProcSight VERSION 1.4.0 LANGUAGES CXX)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# 1. Поиск ncurses.
-# На Arch Linux библиотека разработки поставляется вместе с основным пакетом ncurses.
+# Keep build artifacts under build/bin and build/lib.
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+
 find_package(Curses REQUIRED)
 
-# 2. Определяем исполняемый файл и все связанные ресурсы
-add_executable(procsight
-        main.cpp
-        ProcessList.cpp
-        SystemStats.cpp
+set(PROCSIGHT_SOURCES
+    src/main.cpp
+    src/ProcessList.cpp
+    src/SystemStats.cpp
+    src/App.cpp
+    src/Renderer.cpp
+    src/Theme.cpp
+    src/NcursesSession.cpp
 )
 
-# 3. Подключаем заголовочные файлы
-# Использование PRIVATE ограничивает область видимости только этим таргетом
-target_include_directories(procsight PRIVATE ${CURSES_INCLUDE_DIRS})
+add_executable(procsight ${PROCSIGHT_SOURCES})
 
-# 4. Линковка библиотек
-# В Arch Linux крайне рекомендуется явно линковать ncursesw для поддержки UTF-8
-target_link_libraries(procsight PRIVATE ${CURSES_LIBRARIES} ncursesw)
+target_include_directories(procsight PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    ${CURSES_INCLUDE_DIRS}
+)
 
-# Если ты планируешь использовать расширенные функции форм (меню, поля ввода)
-# можно добавить библиотеку form:
-# target_link_libraries(procsight PRIVATE ${CURSES_LIBRARIES} ncursesw form)
+target_link_libraries(procsight PRIVATE
+    ${CURSES_LIBRARIES}
+    ncursesw
+)
+
+target_compile_features(procsight PRIVATE cxx_std_17)
