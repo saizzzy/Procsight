@@ -1,86 +1,34 @@
-ProcSight v1.0 🛰️
-A Lightweight TUI Process Monitor for Arch Linux
 
-ProcSight is a minimalist, terminal-based system monitor written in C++17. It provides real-time insights into CPU usage and process management by directly interfacing with the Linux `/proc` filesystem.
+# Procsight
 
----
+TUI-монитор процессов и системных ресурсов на C++.
 
-✨ Features
-• Real-time CPU Telemetry: Visual progress bar indicating total CPU load with dynamic color coding (Green/Yellow/Red).
+### Сборка
+Требуется CMake и компилятор с поддержкой C++17.
 
-• Dynamic Process List: Automatically updated table of running processes, sorted by memory usage (RSS).
+```bash
+cmake -S . -B build
+cmake --build build
 
-• Live Filtering: Instant search functionality to isolate specific processes by name.
+Запуск
 
-• Process Management: Built-in signals to terminate individual processes by PID or "kill all" by process name.
+Исполняемый файл по умолчанию находится в папке bin внутри директории сборки:
+Bash
 
-• Resource Efficient: Low overhead, using native Linux C++ APIs without heavy external dependencies.
+./build/bin/procsight
 
----
+Функционал
 
-🛠️ Tech Stack
-• Language: C++17
+    Вывод списка активных процессов.
 
-• UI Library: `ncursesw` (Wide-character support for smooth borders and UTF-8)
+    Мониторинг использования ресурсов системы в реальном времени.
 
-• Build System: CMake 3.20+
+    Управление навигацией через терминал.
 
-• Data Source: Linux Kernel `/proc` virtual filesystem
+Roadmap
 
----
+    Сортировка процессов (по CPU/RAM).
 
-🚀 Getting Started
-Prerequisites
+    Завершение процессов (SIGKILL) через интерфейс.
 
-Ensure you are on a Linux distribution (optimized for Arch Linux). You will need `ncurses` headers and a C++ compiler.
-
-```
-
-sudo pacman -S base-devel cmake ncurses
-
-```
-
-Installation & Build
-
-```
-
-# Clone the repository
-
-git clone https://github.com/saizzzy/Procsight.git
-
-cd Procsight
-
-# Create build directory
-
-mkdir build && cd build
-
-# Configure and Compile
-
-cmake ..
-
-make
-
-# Run the application
-
-./procsight
-
-```
-
----
-
-🎮 Keybindings
----
-
-🏗️ Architecture
-The project follows a modular design for maintainability:
-
-• `SystemStats`: Handles CPU Jiffies calculation and system-wide metrics.
-
-• `ProcessList`: Manages process discovery, memory parsing, and signaling.
-
-• `UI/Main`: Orchestrates the ncurses render loop and user input handling.
-
----
-
-📄 License
-Distributed under the MIT License.
+    Поддержка кастомных конфигураций.
